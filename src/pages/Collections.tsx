@@ -6,7 +6,7 @@ import { albums } from "../data/albums"
 import NewBoard from "./NewBoard";
 
 export default function Collections() {
-  const { savedAlbumIds, removeAlbum, boards } = useCollections();
+  const { savedAlbumIds, boards } = useCollections();
   const [activeMenu, setActiveMenu] = useState<"favorites" | "boards" | null>("favorites");
   const [newBoardModal, setNewBoardModal] = useState(false);
 

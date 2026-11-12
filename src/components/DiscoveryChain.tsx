@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { albums } from "../data/albums";
-import { ArrowRight, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useDiscovery } from "../context/DiscoveryContext";
 import { motion, AnimatePresence } from "motion/react";
 

@@ -12,10 +12,16 @@ export default function BoardPage() {
   const [previewAlbum, setPreviewAlbum] = useState<Album | null>(null);
   const navigate = useNavigate();
   const {boardId} = useParams();
+  
 
   const {boards, removeAlbumFromBoard} = useCollections();
   const board = boards.find((board) => board.id == boardId);
+  if (!board) return <p>Board not found</p>;
+
+
   const boardAlbums = board.albumIds.map((id) => albums.find((album) => album.id == id)).filter((album) => album !== undefined)
+
+
 
   return (
     <main className="">

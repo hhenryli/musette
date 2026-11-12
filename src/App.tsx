@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import Navigation from './components/Navigation'
-
 import Explore from './pages/Explore'
 import Collections from './pages/Collections'
 import BoardPage from './pages/BoardPage'
 import AlbumPage from './pages/AlbumPage'
-import { useLocation, Navigate, Routes, Route } from "react-router-dom"
+import { useLocation, Routes, Route } from "react-router-dom"
 import { Toaster } from "sonner";
 
 

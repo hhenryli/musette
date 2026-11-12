@@ -1,16 +1,12 @@
 import type { Album } from "../types/album";
 import SavePopover from "./SavePopover";
 import TrackList from "./TrackList";
-import { useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
   album: Album;
 };
 
 export default function AlbumContent({ album }: Props) {
-  const navigate = useNavigate();
 
   return (
     <div className="album-detail flex flex-col gap-8 border p-8">

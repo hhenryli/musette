@@ -4,7 +4,7 @@ import type {Album} from "../types/album.ts"
 import Search from "../components/Search.tsx"
 import AlbumCard from "../components/AlbumCard.tsx"
 import {searchAlbums} from '../utils/api.ts'
-import { filterAlbums } from "../utils/filterAlbums.ts";
+
 
 
 export default function Explore() {
@@ -12,8 +12,6 @@ export default function Explore() {
   const [albums, setAlbums] = useState<Album[]>(baseAlbums);
 
   // const filteredAlbums = filterAlbums(albums, searchQuery)
-
-
 
   useEffect(() => {
     if (!searchQuery.trim()) {
