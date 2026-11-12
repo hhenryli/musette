@@ -1,7 +1,9 @@
 import type { Album } from "../types/album";
 
-const SEARCH_URL = `http://localhost:8000/albums/search`
-const BASE_URL = `http://localhost:8000/albums`
+const API_URL = import.meta.env.VITE_API_URL;
+
+const SEARCH_URL = `${API_URL}/albums/search`;
+const BASE_URL = `${API_URL}/albums`;
 
 export async function searchAlbums(searchQuery: string): Promise<Album[]> {
   const response = await fetch(
