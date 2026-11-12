@@ -10,7 +10,7 @@ export function filterAlbums(albums: Album[], query: string) {
       album.title,
       album.artist,
       album.year.toString(),
-      ...album.moods,
+      ...(album.moods ?? []),
     ]
       .join(" ")
       .toLowerCase();
