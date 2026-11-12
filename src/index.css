@@ -1,0 +1,273 @@
+
+@import "tailwindcss";
+
+/* --------------------------------
+   Design tokens
+-------------------------------- */
+
+:root {
+  --bg: #f8f7f3;
+  --surface: #ffffff;
+  --surface-secondary: #eeede8;
+  --surface-hover: #e5e4de;
+
+  --text: #25282d;
+  --text-muted: #4f5966;
+  --text-inactive: #676e76;
+
+  --grey-200: #e3e2de;
+  --grey-300: #bfbeb8;
+  --border: #c4c7c8;
+  --accent: #25282d;
+  --accent-text: #ffffff;
+  --focus: #2864bc;
+
+  --font-display: "Barlow Condensed", Impact, sans-serif;
+  --font-body: "Instrument Sans", Arial, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 20px;
+
+  color-scheme: light;
+}
+
+/* Dark theme */
+
+:root[data-theme="dark"] {
+  --bg: #252d38;
+  --surface: #343e4b;
+  --surface-secondary: #404b59;
+  --surface-hover: #4a5665;
+
+  --text: #f5f5f2;
+  --text-muted: #b9c5d2;
+  --text-inactive: #b5bfca;
+
+  --border: #778597;
+  --accent: #f5f5f2;
+  --accent-text: #252d38;
+  --focus: #a5cbff;
+
+  color-scheme: dark;
+}
+
+/* Tailwind v4 theme */
+
+@theme inline {
+  --color-page: var(--bg);
+  --color-surface: var(--surface);
+  --color-secondary: var(--surface-secondary);
+  --color-foreground: var(--text);
+  --color-muted: var(--text-muted);
+  --color-outline: var(--border);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-serif: var(--font-serif);
+}
+
+/* --------------------------------
+   Global styles
+-------------------------------- */
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.border {
+  border: 1px solid var(--border);
+}
+
+
+/* --------------------------------
+   Styles
+-------------------------------- */
+.padding {
+  padding: 2rem 2rem;
+}
+
+/* --------------------------------
+   Buttons
+-------------------------------- */
+
+.submit-button {
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 8px 24px;
+  border-radius: 99px;
+}
+
+/* --------------------------------
+   Typography
+-------------------------------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.display-small {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 2vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.text-secondary {
+  color: var(--text-muted);
+}
+
+/* --------------------------------
+   Navigation
+-------------------------------- */
+
+.nav-link {
+  font-family: var(--font-display);
+  color: var(--text-inactive);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-link[aria-current="page"] {
+  color: var(--text);
+}
+
+/* Active navigation */
+
+.nav-link[aria-current="page"] {
+  text-decoration-thickness: 0.035em;
+  text-underline-offset: 0.12em;
+}
+
+/* --------------------------------
+   Form elements
+-------------------------------- */
+
+input {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1rem 1.25rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:hover {
+  border-color: var(--text-muted);
+}
+
+.search-button {
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 8px 24px;
+  border-radius: 99px;
+}
+
+.secondary-button {
+  border: var(--border);
+  color: var(--text);
+  padding: 8px 24px;
+  border-radius: 99px;
+}
+/* --------------------------------
+   Accessibility
+-------------------------------- */
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* Accessible non-animated preference */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------
+   Text Hierarchy
+-------------------------------- */
+h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+p, li {
+  font-family: var(--font-body);
+  font-size: 12px;
+}
+
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-muted);
+}
