@@ -5,7 +5,7 @@ import time
 
 app = Flask(__name__)
 
-CORS(app, origins=["http://localhost:5173", "https://musette-backend.vercel.app"])
+CORS(app, origins=["http://localhost:5173", "https://musette.vercel.app"])
 
 SEARCH_URL = "https://itunes.apple.com/search"
 LOOKUP_URL = "https://itunes.apple.com/lookup"
