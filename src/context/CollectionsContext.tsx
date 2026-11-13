@@ -99,8 +99,8 @@ export function CollectionsProvider({ children }: { children: ReactNode }) {
   
   async function updateBoard(
     boardId: string,
-    boardName?: string,
-    boardDesc?: string,
+    boardName: string,
+    boardDesc: string,
   ) {
     const response = await updateBoardRequest(boardId, boardName, boardDesc)
 

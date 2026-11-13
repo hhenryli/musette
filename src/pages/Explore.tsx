@@ -1,6 +1,5 @@
 // Explore.tsx
 import { useEffect, useState } from "react"
-import { albums as baseAlbums } from "../data/albums.ts"
 import type { Album } from "../types/album.ts"
 import AlbumCard from "../components/AlbumCard.tsx"
 import { searchAlbums, discoverAlbums } from "../utils/api.ts"

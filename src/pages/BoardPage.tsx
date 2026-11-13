@@ -19,6 +19,7 @@ export default function BoardPage() {
   const [boardName, setBoardName] = useState(board?.name ?? "");
   const [boardDesc, setBoardDesc] = useState(board?.description ?? "");
 
+  if (!boardId) return <p>Board not found</p>;
   if (!board) return <p>Board not found</p>;
   const boardAlbums = board.albumIds.map((id) => albums.find((album) => album.id == id)).filter((album) => album !== undefined)
 
