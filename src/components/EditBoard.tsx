@@ -8,8 +8,8 @@ type BoardProp = {
 }
 
 export default function EditBoard( {board, setShowEditMenu}: BoardProp ) {
-  const [boardName, setBoardName] = useState(board.name);
-  const [boardDesc, setBoardDesc] = useState(board.description);
+  const [boardName, setBoardName] = useState(board?.name ?? "");
+  const [boardDesc, setBoardDesc] = useState(board?.description ?? "");
   const { updateBoard } = useCollections();
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {

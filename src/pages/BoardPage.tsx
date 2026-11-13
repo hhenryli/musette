@@ -24,7 +24,7 @@ export default function BoardPage() {
   const boardAlbums = board.albumIds.map((id) => albums.find((album) => album.id == id)).filter((album) => album !== undefined)
 
 
-  async function handleBlur( boardName: string, boardDesc: string) {
+  const handleBlur = async ( boardName: string, boardDesc: string) => {
     await updateBoard(boardId, boardName, boardDesc)
   }
 
