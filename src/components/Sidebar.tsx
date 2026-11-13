@@ -15,7 +15,7 @@ type Props = {
 export default function Sidebar( {boardId, onPreview } : Props) {
   const [sidebarWidth, setSideWidth] = useState(300);
   const [searchQuery, setSearchQuery] = useState("");
-  const { addAlbumToBoard} = useCollections();
+  const { boards, addAlbumToBoard} = useCollections();
 
   const isResizing = useRef(false);
   const filteredAlbums = filterAlbums(albums, searchQuery)
@@ -29,7 +29,7 @@ export default function Sidebar( {boardId, onPreview } : Props) {
     if (!isResizing.current) return;
 
     setSideWidth(
-      Math.min(500, Math.max(200, e.clientX))
+      Math.min(1000, Math.max(200, e.clientX))
     );
   }
 
@@ -42,7 +42,7 @@ export default function Sidebar( {boardId, onPreview } : Props) {
   }
 
   return (
-    <div className="h-full bg-[var(--grey-200)]">
+    <div className="h-full">
       <aside 
         className="relative flex h-full p-4"
         style={{width: sidebarWidth}}
@@ -50,13 +50,20 @@ export default function Sidebar( {boardId, onPreview } : Props) {
         <div className="flex flex-col overflow-y-auto gap-4 w-full">
           <div className="">
               <h1>Albums</h1>
-            </div>
+          </div>
 
             <Search setSearchQuery={setSearchQuery} />
-            <AlbumGrid albums={filteredAlbums} onAdd={(album) => addAlbumToBoard(boardId, album.id)} onPreview={onPreview}/>
+            <AlbumGrid albums={filteredAlbums} 
+                      onAdd={(album) => {
+                        const board = boards.find((b) => b.id === boardId);
+                        if (board && !board.albumIds.includes(album.id)) {
+                          addAlbumToBoard(boardId, album.id);
+                        }
+                      }}
+                      onPreview={onPreview}
+            />
         </div>
 
-        
         <div
           role="separator"
           aria-label="Resize album sidebar"

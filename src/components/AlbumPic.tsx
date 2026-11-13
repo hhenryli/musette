@@ -5,10 +5,25 @@ type Props = {
 }
 
 export default function AlbumPic( {album}: Props) {
-  return (
-    <div
-      style={{ backgroundColor: album.color }}
-      className="aspect-square w-full"
+
+  const artwork = album.artwork ? (
+    <img
+      className="album"
+      src={album.artwork}
+      alt={`${album.title} album cover`}
+      loading="lazy"
     />
+  ) : (
+    <div
+      className="album"
+      style={{ backgroundColor: album.color }}
+    />
+  );
+  
+  return (
+    <>
+      {artwork}
+    </>
+
   )
 }

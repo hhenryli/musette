@@ -22,9 +22,6 @@ export default function Search( { setSearchQuery} : Props) {
         onChange={(e) => setSearchInput(e.target.value)}
       >
       </input>
-      <button className="search-button">
-        Search
-      </button>
     </form>
   )
 }

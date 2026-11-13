@@ -1,32 +1,33 @@
+// Navigation.tsx
 import { NavLink } from "react-router-dom";
 import DiscoveryChain from "./DiscoveryChain";
+import Search from "./Search";
 
 type Props = {
   variant?: "default" | "compact";
+  setSearchQuery?: (query: string) => void;
 };
 
-export default function Navigation({ variant = "default" }: Props) {
+export default function Navigation({ variant = "default", setSearchQuery }: Props) {
   const isCompact = variant === "compact";
 
   return (
-    <nav className="w-full grid grid-cols-3 items-center">
-      <NavLink
-        to="/"
-        className={isCompact ? "display-small nav-link" : "display nav-link"}
-      >
-        Explore
-      </NavLink>
+    <nav className="w-full flex">
+      <div className="w-full flex justify-left items-center">
+      <NavLink to="/" className={isCompact ? "display-small nav-link" : "display-medium nav-link"}>
+          Explore
+        </NavLink>
+      </div>
+      <div className="w-full flex justify-center">
+        {isCompact ? <DiscoveryChain /> : setSearchQuery && <Search setSearchQuery={setSearchQuery} />}
+      </div>
+      <div className="w-full flex flex-col items-end justify-center">
 
-      <div className="flex justify-center">
-        {isCompact && <DiscoveryChain />}
+        <NavLink to="/collections" className={isCompact ? "display-small nav-link" : "display-medium nav-link"}>
+          Collection
+        </NavLink>
       </div>
 
-      <NavLink
-        to="/collections"
-        className={`${isCompact ? "display-small" : "display"} nav-link justify-self-end`}
-      >
-        Collection
-      </NavLink>
     </nav>
   );
 }

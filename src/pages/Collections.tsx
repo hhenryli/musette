@@ -6,14 +6,20 @@ import { albums } from "../data/albums"
 import NewBoard from "./NewBoard";
 
 export default function Collections() {
-  const { savedAlbumIds, boards } = useCollections();
+  const { savedAlbumIds, boards, boardsLoading } = useCollections();
   const [activeMenu, setActiveMenu] = useState<"favorites" | "boards" | null>("favorites");
   const [newBoardModal, setNewBoardModal] = useState(false);
 
   const favorites = savedAlbumIds.map((id) => albums.find((album) => album.id == id)).filter((album) => album !== undefined);
 
+  if (boardsLoading) return <h1>Boards loading</h1>
+
   return (
     <div className="mt-8 flex flex-col gap-8">
+
+      {newBoardModal && <NewBoard onClose={() => setNewBoardModal(false)} />}
+
+      
       <div className="flex gap-8">
         <button 
           className={`nav-link ${activeMenu === "favorites" ? "active" : ""}`}
@@ -48,10 +54,16 @@ export default function Collections() {
                 <AlbumCard key={favorite.id} album={favorite} />
               ))}
             </div>
-          )) : (
-            boards.length === 0 ? (
-              <p>You have no saved boards</p>
-            ) : (
+          )) : boards.length === 0 ? (
+            <div className="grid grid-cols-4 gap-4">
+              <p className="col-span-4">You have no saved boards</p>
+              <button onClick={() => setNewBoardModal(true)} className="add-board-button">
+                <span className="flex justify-center items-center w-1/5 aspect-square rounded-full bg-[var(--text)] text-[var(--bg)]">
+                  +
+                </span>
+              </button>
+            </div>
+          ) : (
             <div>
               <div className="grid grid-cols-4 gap-4">
                 {[...boards]
@@ -59,23 +71,15 @@ export default function Collections() {
                   .map((board) => (
                     <BoardPreview key={board.id} boardProp={board} />
                 ))}
-
-                {newBoardModal && (
-                  <NewBoard onClose={() => setNewBoardModal(false)}/>
-                )}
-
-                <button 
-                  onClick={() => setNewBoardModal(true)}
-                  className="flex justify-center items-center w-full bg-[var(--grey-300)] rounded-sm aspect-square opacity-50 hover:opacity-100 transition-opacity duration-200"
-                >
+          
+                <button onClick={() => setNewBoardModal(true)} className="add-board-button">
                   <span className="flex justify-center items-center w-1/5 aspect-square rounded-full bg-[var(--text)] text-[var(--bg)]">
                     +
                   </span>
                 </button>
               </div>
-
             </div>
-          ))
+          )
         }
       </div>
     

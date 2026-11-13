@@ -84,10 +84,9 @@ export default function AlbumCard(props: Props) {
         <>
           <SavePopover album={album} onAdd={onAdd} />
 
-          <div className="album-text-container">
+          <div className="">
             <h2>{album.title}</h2>
             <p>{album.artist}</p>
-            <p>{album.year}</p>
           </div>
         </>
       )}

@@ -7,9 +7,9 @@ import { NavLink } from "react-router-dom";
 import { Ellipsis } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { formatTime } from "../utils/formatTime";
-import { useCollections } from "../context/CollectionsContext";
-import EditBoard from "./EditBoard";
 
+import EditBoard from "./EditBoard";
+import DeleteModal from "./DeleteModal";
 
 type BoardProps = {
   boardProp: Board;
@@ -20,13 +20,13 @@ export default function BoardPreview({ boardProp }: BoardProps) {
   const [showBoardMenu, setShowBoardMenu] = useState(false);
   const [showEditMenu, setShowEditMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { deleteBoard} = useCollections();
+
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const albumIds = boardProp.albumIds.slice(0, 3);
+  const albumIds = boardProp.albumIds.slice(0, 4);
   const albumPreviews = albumIds
     .map((id) => albums.find((album) => album.id === id))
     .filter((album) => album !== undefined);
@@ -70,28 +70,13 @@ export default function BoardPreview({ boardProp }: BoardProps) {
     return () => clearTimers();
   }, []);
 
-  function DeleteModal() {
-    return (
-      <div className="modal-container">
-        <div className="edit-form-modal">
-          <h1>Are you sure you want to delete this board?</h1>
-          <p>Deletion is permanent</p>
-          <div className="flex gap-8">
-            <button className="secondary-button" onClick={() => setShowDeleteModal(false)}>Cancel</button>
-            <button className="submit-button" onClick={() => deleteBoard(boardProp.id)}>Delete</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-  
   return (
     <div className="group/board relative flex flex-col gap-2">
       {showEditMenu && (
         <EditBoard board={boardProp} setShowEditMenu={setShowEditMenu}/>
       )}
       {showDeleteModal && (
-        <DeleteModal/>
+        <DeleteModal boardId={boardProp.id} setShowDeleteModal={setShowDeleteModal}/>
       )}
 
       <div className="relative">

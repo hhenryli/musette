@@ -1,4 +1,3 @@
-
 import type { Album } from "../types/album"
 
 // Converts song titles into your Track[] structure.
@@ -7,13 +6,13 @@ const tracks = (titles: string[]) =>
 
 export const albums: Album[] = [
   {
-    id: "1",
+    id: "1429662346",
     title: "Melodrama",
     artist: "Lorde",
     year: 2017,
     color: "#7494B6",
     moods: ["dreamy", "energetic", "melancholic", "introspective"],
-    artwork: "/albums/melodrama.webp",
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8d/0d/15/8d0d1532-493b-52ec-6a29-a239ced6931b/17UMGIM81023.rgb.jpg/600x600bf-60.jpg",
     description:
       "An emotionally charged pop album tracing the highs and lows of a night out, from euphoria and heartbreak to solitude and self-discovery.",
     tracks: tracks([
@@ -31,12 +30,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "2",
+    id: "1440818584",
     title: "Pure Heroine",
     artist: "Lorde",
     year: 2013,
     color: "#969AA0",
     moods: ["dreamy", "nostalgic", "dark", "introspective"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/96/a5/09/96a50916-169b-724c-b722-b8c474406352/13UAAIM68691.rgb.jpg/600x600bf-60.jpg",
     description:
       "Minimalist electropop capturing suburban adolescence, friendship, boredom, and the uneasiness of growing up.",
     tracks: tracks([
@@ -53,12 +53,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "3",
+    id: "1146195596",
     title: "Blonde",
     artist: "Frank Ocean",
     year: 2016,
     color: "#A5B4A5",
     moods: ["dreamy", "melancholic", "introspective", "ambient"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/bb/45/68/bb4568f3-68cd-619d-fbcb-4e179916545d/BlondCover-Final.jpg/600x600bf-60.jpg",
     description:
       "An intimate, experimental exploration of memory, love, identity, and the passage of time, blending alternative R&B with sparse instrumentation.",
     tracks: tracks([
@@ -82,12 +83,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "4",
+    id: "1239976329",
     title: "Ctrl",
     artist: "SZA",
     year: 2017,
     color: "#739273",
     moods: ["warm", "melancholic", "introspective", "nostalgic"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/20/28/8f/20288f6f-fbf2-fb0f-6732-e7d334e1ff50/886446548432.jpg/600x600bf-60.jpg",
     description:
       "A candid alternative R&B album about relationships, insecurity, independence, and the complicated search for self-acceptance.",
     tracks: tracks([
@@ -108,12 +110,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "5",
+    id: "1440838039",
     title: "Currents",
     artist: "Tame Impala",
     year: 2015,
     color: "#A78ABF",
     moods: ["dreamy", "energetic", "psychedelic", "nostalgic"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a8/2e/b4/a82eb490-f30a-a321-461a-0383c88fec95/15UMGIM23316.rgb.jpg/600x600bf-60.jpg",
     description:
       "A psychedelic pop journey through personal transformation, romantic uncertainty, and change, driven by lush synthesizers and hypnotic rhythms.",
     tracks: tracks([
@@ -133,12 +136,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "6",
+    id: "1109714933",
     title: "In Rainbows",
     artist: "Radiohead",
     year: 2007,
     color: "#C86E45",
     moods: ["warm", "melancholic", "dreamy", "introspective"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dd/50/c7/dd50c790-99ac-d3d0-5ab8-e3891fb8fd52/634904032463.png/600x600bf-60.jpg",
     description:
       "A richly textured alternative rock album balancing electronic experimentation with intimate songwriting, warmth, and emotional vulnerability.",
     tracks: tracks([
@@ -155,7 +159,9 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "7",
+    // TODO: verify this ID against your own /albums/search?q=Punisher Phoebe Bridgers,
+    // I couldn't confirm it from here
+    id: "1500868559",
     title: "Punisher",
     artist: "Phoebe Bridgers",
     year: 2020,
@@ -178,12 +184,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "8",
+    id: "1474669063",
     title: "Norman Fucking Rockwell!",
     artist: "Lana Del Rey",
     year: 2019,
     color: "#88A9B0",
     moods: ["nostalgic", "dreamy", "warm", "melancholic"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/c6/5f/b9/c65fb9eb-da2f-89a9-b640-2fff1fc3a660/19UMGIM61350.rgb.jpg/600x600bf-60.jpg",
     description:
       "A wistful collection of piano ballads and psychedelic pop exploring romance, disillusionment, and an idealized vision of American culture.",
     tracks: tracks([
@@ -204,12 +211,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "9",
+    id: "1440881047",
     title: "DAMN.",
     artist: "Kendrick Lamar",
     year: 2017,
     color: "#B93E38",
     moods: ["dark", "energetic", "introspective", "intense"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/86/c9/bb/86c9bb30-fe3d-442e-33c1-c106c4d23705/17UMGIM88776.rgb.jpg/600x600bf-60.jpg",
     description:
       "A tense and deeply personal hip-hop album examining faith, pride, fear, morality, and contradictions within the human experience.",
     tracks: tracks([
@@ -230,7 +238,8 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "10",
+    // TODO: verify this ID, search results only surfaced the 10th-anniversary reissue clearly
+    id: "1440880786",
     title: "Emotion",
     artist: "Carly Rae Jepsen",
     year: 2015,
@@ -254,12 +263,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "11",
+    id: "697194953",
     title: "Discovery",
     artist: "Daft Punk",
     year: 2001,
     color: "#536DAB",
     moods: ["energetic", "nostalgic", "dreamy", "electronic"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fd/4a/77/fd4a77db-0ebc-d043-41a2-f32fa1bb0fb4/dj.qrikkdwj.jpg/600x600bf-60.jpg",
     description:
       "A playful electronic album combining house, disco, and pop into a colorful celebration of dance music and futuristic nostalgia.",
     tracks: tracks([
@@ -280,12 +290,13 @@ export const albums: Album[] = [
     ]),
   },
   {
-    id: "12",
+    id: "1524801260",
     title: "folklore",
     artist: "Taylor Swift",
     year: 2020,
     color: "#A5A19A",
     moods: ["calm", "melancholic", "nostalgic", "introspective"],
+    artwork: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/ca/f3/67/caf367a5-2cf6-6b2e-a891-97dc57b19f08/20UMGIM64216.rgb.jpg/600x600bf-60.jpg",
     description:
       "An atmospheric indie-folk-inspired album weaving fictional characters, memories, and intimate reflections into interconnected stories.",
     tracks: tracks([

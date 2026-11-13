@@ -6,12 +6,12 @@
 -------------------------------- */
 
 :root {
-  --bg: #f8f7f3;
-  --surface: #ffffff;
+  --bg: #191617;
+  --surface: #dedace;
   --surface-secondary: #eeede8;
   --surface-hover: #e5e4de;
 
-  --text: #25282d;
+  --text: #dedace;
   --text-muted: #4f5966;
   --text-inactive: #676e76;
 
@@ -146,6 +146,15 @@ button:not(:disabled) {
   text-transform: uppercase;
 }
 
+.display-medium {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 4vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
 .display-small {
   font-family: var(--font-display);
   font-weight: 700;
@@ -193,9 +202,9 @@ button:not(:disabled) {
    Form elements
 -------------------------------- */
 
-input {
+.search-input {
   width: 100%;
-  background: var(--surface);
+
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -203,8 +212,12 @@ input {
   outline: none;
 }
 
+.search-input:focus {
+  outline: none;
+}
+
 .search-input::placeholder {
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .search-input:hover {

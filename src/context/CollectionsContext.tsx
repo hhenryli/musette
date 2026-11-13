@@ -7,24 +7,32 @@ import {
 } from "react";
 
 import type { Board } from "../types/board";
-import { boards as initialBoards } from "../data/boards";
+import { getBoards, 
+        createBoard as createBoardRequest, 
+        deleteBoard as deleteBoardRequest, 
+        addAlbumToBoard as addAlbumToBoardRequest, 
+        removeAlbumFromBoard as removeAlbumFromBoardRequest,
+        updateBoard as updateBoardRequest
+      } from "../utils/api";
 
 type CollectionsContextType = {
   savedAlbumIds: string[];
   boards: Board[];
+  boardsLoading: boolean;
 
   addAlbum: (id: string) => void;
   removeAlbum: (id: string) => void;
 
-  createBoard: (name: string) => string;
-  addAlbumToBoard: (boardId: string, albumId: string) => void;
-  removeAlbumFromBoard: (boardId: string, albumId: string) => void;
+  createBoard: () => Promise<string>;
+  addAlbumToBoard: (boardId: string, albumId: string) => Promise<void>;
+  removeAlbumFromBoard: (boardId: string, albumId: string) => Promise<void>;
   updateBoard: (
     boardId: string,
-    changes: { name?: string; description?: string }
-  ) => void;
+    boardName?: string,
+    boardDescription?: string
+  ) => Promise<void>;
 
-  deleteBoard: (boardId: string) => void;
+  deleteBoard: (boardId: string) => Promise<void>;
 };
 
 const CollectionsContext = createContext<CollectionsContextType | null>(null);
@@ -41,24 +49,31 @@ export function CollectionsProvider({ children }: { children: ReactNode }) {
   });
 
   // BOARDS
-  const [boards, setBoards] = useState<Board[]>(() => {
-    try {
-      const saved = localStorage.getItem("boards");
-  
-      return saved ? JSON.parse(saved) : initialBoards;
-    } catch {
-      return initialBoards;
-    }
-  });
+  const [boards, setBoards] = useState<Board[]>([]);
+  const [boardsLoading, setBoardsLoading] = useState(false);
 
   // SAVE TO LOCAL STORAGE
   useEffect(() => {
     localStorage.setItem("savedAlbums", JSON.stringify(savedAlbumIds));
   }, [savedAlbumIds]);
 
+  // GET BOARDS FROM API
   useEffect(() => {
-    localStorage.setItem("boards", JSON.stringify(boards));
-  }, [boards]);
+    async function loadBoards() {
+      try {
+        const data = await getBoards()
+        setBoards(data)
+        setBoardsLoading(true)
+      }
+      catch (error) {
+        console.error("Error retrieving boards:", error);
+      }
+      finally {
+        setBoardsLoading(false)
+      }
+    }
+    loadBoards()
+  }, []);
 
   // FAVORITES FUNCTIONS
   function addAlbum(id: string) {
@@ -74,81 +89,41 @@ export function CollectionsProvider({ children }: { children: ReactNode }) {
   }
 
   // BOARD FUNCTIONS
-  function createBoard(name: string) {
-    const now = new Date().toISOString();
 
-    const newBoard: Board = {
-      id: crypto.randomUUID(),
-      name,
-      albumIds: [],
-      layout: "grid",
-      createdAt: now,
-      modifiedAt: now,
-    };
+  async function createBoard() {
+    const data = await createBoardRequest();
 
-    setBoards((prev) => [...prev, newBoard]);
-    return newBoard.id;
+    setBoards((prev) => [...prev, data]);
+    return data.id
   }
   
-  function updateBoard(
+  async function updateBoard(
     boardId: string,
-    changes: { name?: string; description?: string }
+    boardName?: string,
+    boardDesc?: string,
   ) {
-    setBoards((prev) =>
-      prev.map((board) =>
-        board.id === boardId
-          ? {
-              ...board,
-              ...changes,
-              modifiedAt: new Date().toISOString(),
-            }
-          : board
-      )
-    );
+    const response = await updateBoardRequest(boardId, boardName, boardDesc)
+
+    setBoards((prev) => prev.map((board) => board.id === boardId ? response : board))
   }
 
-  function deleteBoard(boardId: string) {
+  async function deleteBoard(boardId: string) {
+    await deleteBoardRequest(boardId);
     setBoards((prev) =>
       prev.filter((board) => board.id !== boardId)
     );
   }
 
-  function addAlbumToBoard(boardId: string, albumId: string) {
-    console.log("Context received:", { boardId, albumId });
+  async function addAlbumToBoard(boardId: string, albumId: string) {
+    const response = await addAlbumToBoardRequest(boardId, albumId);
   
-    setBoards((prev) => {
-      console.log("Boards before update:", prev);
-  
-      const updatedBoards = prev.map((board) => {
-        if (board.id !== boardId) return board;
-  
-        if (board.albumIds.includes(albumId)) return board;
-  
-        return {
-          ...board,
-          albumIds: [...board.albumIds, albumId],
-          modifiedAt: new Date().toISOString(),
-        };
-      });
-  
-      console.log("Boards after update:", updatedBoards);
-  
-      return updatedBoards;
-    });
+    setBoards((prev) => prev.map((board) => board.id === boardId ? response : board))
   }
 
-  function removeAlbumFromBoard(boardId: string, albumId: string) {
-    setBoards((prev) =>
-      prev.map((board) => {
-        if (board.id !== boardId) return board;
+  async function removeAlbumFromBoard(boardId: string, albumId: string) {
+    const response = await removeAlbumFromBoardRequest(boardId, albumId);
 
-        return {
-          ...board,
-          albumIds: board.albumIds.filter((id) => id !== albumId),
-          modifiedAt: new Date().toISOString(),
-        };
-      })
-    );
+    setBoards((prev) => prev.map((board) => board.id === boardId ? response : board))
   }
 
   return (
@@ -156,6 +131,7 @@ export function CollectionsProvider({ children }: { children: ReactNode }) {
       value={{
         savedAlbumIds,
         boards,
+        boardsLoading,
         addAlbum,
         removeAlbum,
         createBoard,

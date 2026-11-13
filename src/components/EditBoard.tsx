@@ -15,7 +15,7 @@ export default function EditBoard( {board, setShowEditMenu}: BoardProp ) {
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setShowEditMenu(false);
-    updateBoard(board.id, {name: boardName, description: boardDesc})
+    updateBoard(board.id, boardName, boardDesc)
   }
 
   return (
