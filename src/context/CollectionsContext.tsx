@@ -28,8 +28,8 @@ type CollectionsContextType = {
   removeAlbumFromBoard: (boardId: string, albumId: string) => Promise<void>;
   updateBoard: (
     boardId: string,
-    boardName?: string,
-    boardDescription?: string
+    boardName: string,
+    boardDescription: string
   ) => Promise<void>;
 
   deleteBoard: (boardId: string) => Promise<void>;
